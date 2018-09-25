@@ -6,3 +6,6 @@
  * Time: 15:04
  */
 echo "test1234";
+
+
+echo "First Mini project for IS 601";
