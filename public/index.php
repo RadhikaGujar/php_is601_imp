@@ -12,10 +12,10 @@ class main
         while(! feof($file)){
 
             $record = fgetcsv($file);
-            print_r($record);
+            $records[]= $record;
         }
 
-
         fclose($file);
+        print_r($records);
     }
 }
