@@ -9,8 +9,22 @@ class main
     {
        $records = csv::getRecords($filename);
 
+       $table = html::generateTable($records);
+
     }
 }
+
+// Create HTML TABLE
+class html_table{
+    public static function open_htmlTable(){
+        return '<table class="table table-bordered">';
+    }
+    public static function close_htmlTable(){
+        return '</table>';
+    }
+}
+
+
 
 class csv {
 
@@ -55,6 +69,12 @@ class record{
         print_r($this);
 
 
+    }
+
+    public function returnArray(){
+
+        $array = (array) $this;
+        return $array;
     }
 
 
