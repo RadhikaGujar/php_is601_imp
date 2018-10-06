@@ -58,6 +58,18 @@ class create_table_Header{
     }
 }
 
+// create table rows
+class create_table_Rows{
+
+    public static function open_tableRow(){
+        return '<tr>';
+    }
+    public static function close_tableRow(){
+        return '</tr>';
+    }
+}
+
+
 class csv {
 
     public static function getRecords($filename){
