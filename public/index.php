@@ -10,7 +10,8 @@ class main
        $records = csv::getRecords($filename);
 
        $table = html::generateTable($records);
-       echo $table;
+       //echo $table;
+        Output::display_table($table);
 
     }
 }
@@ -241,3 +242,9 @@ class html {
 }
 
 
+class Output {
+
+    public static function display_table($table) {
+        echo $table;
+    }
+}
