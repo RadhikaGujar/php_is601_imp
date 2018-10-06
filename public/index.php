@@ -15,6 +15,77 @@ class main
     }
 }
 
+class csv {
+
+    public static function getRecords($filename){
+
+        $file = fopen($filename, "r");
+
+        $fieldNames = array();
+        $count = 0;
+
+        while(! feof($file)){
+
+            $record = fgetcsv($file);
+
+            if($count==0){
+
+                $fieldNames = $record;
+            }
+
+            else{
+
+                $records[] = recordFactory::create($fieldNames,$record);
+            }
+            $count++;
+        }
+
+        fclose($file);
+        return $records;
+    }
+}
+
+class record{
+
+    public function __construct(Array $fieldNames =null, Array $values = null)
+    {
+        $record = array_combine($fieldNames,$values);
+
+        foreach ($record as $property => $value){
+
+            $this->createProperty($property,$value);
+        }
+        // print_r($this);
+
+
+    }
+
+    public function returnArray(){
+
+        $array = (array) $this;
+        return $array;
+    }
+
+
+    public function createProperty($name = "FirstName", $value = "Radhika"){
+
+        $this->{$name} = $value;
+    }
+}
+
+
+
+class recordFactory
+{
+
+    public static function create(Array $fieldNames = null, Array $values = null)
+    {
+        $record = new record($fieldNames,$values);
+        return $record;
+
+    }
+}
+
 // create html body
 class html_body{
 
@@ -31,7 +102,7 @@ class html_body{
 // Create HTML TABLE
 class html_table{
     public static function open_htmlTable(){
-        return '<table class="table table-bordered">';
+        return '<table class="table table-bordered table table-striped">';
     }
     public static function close_htmlTable(){
         return '</table>';
@@ -41,7 +112,7 @@ class html_table{
 // create table headings
 class html_tableHead{
     public static function open_TableHead(){
-        return '<thead class="table-active">';
+        return '<thead class="table-dark">';
     }
     public static function close_TableHead(){
         return '</thead >';
@@ -123,14 +194,11 @@ class html {
                 $array = $record->returnArray();
                 $fields = array_keys($array);
                 $values = array_values($array);
-//            print_r($fields);
-//            print_r($values);
                 foreach($fields as  $value) {
                     $html .= create_table_Header::createHeader($value);
                 }
-//            $html .= '</tr>';
                 $html .= html_tableHead::close_TableHead();
-//            $html .= create_table_Rows::open_tableRow();
+
 
                 foreach($values as  $value2){
                     $html .= tableData::printTabledata($value2);
@@ -173,73 +241,3 @@ class html {
 }
 
 
-class csv {
-
-    public static function getRecords($filename){
-
-        $file = fopen($filename, "r");
-
-        $fieldNames = array();
-        $count = 0;
-
-        while(! feof($file)){
-
-            $record = fgetcsv($file);
-
-            if($count==0){
-
-                $fieldNames = $record;
-            }
-
-            else{
-
-                $records[] = recordFactory::create($fieldNames,$record);
-            }
-            $count++;
-        }
-
-        fclose($file);
-        return $records;
-    }
-}
-
-class record{
-
-    public function __construct(Array $fieldNames =null, Array $values = null)
-    {
-        $record = array_combine($fieldNames,$values);
-
-        foreach ($record as $property => $value){
-
-        $this->createProperty($property,$value);
-    }
-       // print_r($this);
-
-
-    }
-
-    public function returnArray(){
-
-        $array = (array) $this;
-        return $array;
-    }
-
-
-    public function createProperty($name = "FirstName", $value = "Radhika"){
-
-        $this->{$name} = $value;
-    }
-}
-
-
-
-class recordFactory
-{
-
-    public static function create(Array $fieldNames = null, Array $values = null)
-    {
-        $record = new record($fieldNames,$values);
-        return $record;
-
-    }
-}
