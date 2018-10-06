@@ -14,6 +14,19 @@ class main
     }
 }
 
+// create html body
+class html_body{
+
+    public static function open_HtmlBody(){
+        return '<body>';
+    }
+    public static function close_HtmlBody(){
+        return '</body>';
+    }
+}
+
+
+
 // Create HTML TABLE
 class html_table{
     public static function open_htmlTable(){
@@ -34,6 +47,7 @@ class html_tableHead{
     }
 
 }
+
 
 
 
