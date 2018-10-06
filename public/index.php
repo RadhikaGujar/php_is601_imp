@@ -213,7 +213,7 @@ class record{
 
         $this->createProperty($property,$value);
     }
-        print_r($this);
+       // print_r($this);
 
 
     }
