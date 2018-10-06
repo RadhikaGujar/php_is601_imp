@@ -9,9 +9,7 @@ class main
     {
        $records = csv::getRecords($filename);
 
-       $record = recordFactory::create();
-
-       print_r($record);
+       print_r($records);
     }
 }
 
@@ -24,7 +22,7 @@ class csv {
         while(! feof($file)){
 
             $record = fgetcsv($file);
-            $records[] = $record;
+            $records[] = recordFactory::create();
         }
 
         fclose($file);
