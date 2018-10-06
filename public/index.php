@@ -24,6 +24,17 @@ class html_table{
     }
 }
 
+// create table headings
+class html_tableHead{
+    public static function open_TableHead(){
+        return '<thead class="table-active">';
+    }
+    public static function close_TableHead(){
+        return '</thead >';
+    }
+
+}
+
 
 
 class csv {
