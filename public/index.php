@@ -68,7 +68,7 @@ class record{
     }
 
 
-    public function createProperty($name = "FirstName", $value = "Radhika"){
+    public function createProperty($name, $value){
 
         $this->{$name} = $value;
     }
@@ -180,56 +180,39 @@ class html {
 //Start Table
         $html .= html_table::open_htmlTable();
 // Header Row
-//    $html .= '<tr>';
 
         $count =0;
 
-
         foreach ($records as $record){
 
-            if($count == 0){
-                $html .= html_tableHead::open_TableHead();
+            //if($count == 0){
+              //  $html .= html_tableHead::open_TableHead();
 
-                $html .= create_table_Rows::open_tableRow();
+                //$html .= create_table_Rows::open_tableRow();
 
                 $array = $record->returnArray();
                 $fields = array_keys($array);
                 $values = array_values($array);
-                foreach($fields as  $value) {
-                    $html .= create_table_Header::createHeader($value);
-                }
-                $html .= html_tableHead::close_TableHead();
+                while($count==0){
+                    $html .= html_tableHead::open_TableHead();
+                    $html .= create_table_Rows::open_tableRow();
 
+                    $html .= Utility::for_loop($fields,0);
+                    $html .= create_table_Rows::close_tableRow();
+                    $html .= html_tableHead::close_TableHead();
 
-                foreach($values as  $value2){
-                    $html .= tableData::printTabledata($value2);
-                }
-
-                $html .= create_table_Rows::close_tableRow();
-
-
-            } else {
-
-                $array = $record->returnArray();
-                $values = array_values($array);
-                $html .= create_table_Rows::open_tableRow();
-
-                foreach($values as  $value2){
-                    $html .= tableData::printTabledata($value2);
+                    $count++;
                 }
 
-                $html .= create_table_Rows::close_tableRow();
 
-            }
 
-            $count++;
+            $html .= create_table_Rows::open_tableRow();
+            $html .= Utility::for_loop($values,1);
+            $html .= create_table_Rows::close_tableRow();
 
         }
 
-
-
-
-//Finish table and return
+        //Finish table and return
         $html .= html_table::close_htmlTable();
         $html .= html_body::close_HtmlBody() ;
         $html .= '</html>';
@@ -239,6 +222,23 @@ class html {
 
     }
 
+}
+
+class Utility{
+
+    public static function for_loop($values ,$check)
+    {
+        $html = '';
+        foreach($values as $property=>$value2){
+            if($check==0){
+                $html .= create_table_Header::createHeader($value2);
+            }
+            else {
+                $html .= tableData::printTabledata($value2);
+            }
+        }
+        return $html;
+    }
 }
 
 
